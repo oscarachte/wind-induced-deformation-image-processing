@@ -1,69 +1,50 @@
-# Wind-Induced Deformation Measurement Using Image Processing
+# Experimental Investigation of Wind-Induced Deformation
 
-**EPFL · Measurement Techniques · Team project (4 students) · Python / OpenCV**
+**EPFL · Measurement Techniques (ME-301) · BA6 · 4 ECTS · Team of 4**
+
+**Python · OpenCV · Experimental Measurements · Fluid–Structure Interaction**
 
 ## Overview
 
-This project investigated the deformation of a flexible strip exposed to airflow from a hair dryer. The experimental setup combined several measurement approaches to study the interaction between airflow and a deformable structure.
+This project investigated the deformation of a flexible strip subjected to airflow, as a simplified model of a plant bending under wind.
 
-My main contribution was developing an **image-based measurement workflow** to track the strip's tip and quantify its displacement over time. I also helped coordinate the project, worked with teammates on measurement methods, and drafted the technical report apart from the sections describing the other three measurement techniques.
+The objective was to design an experimental setup, implement different measurement techniques, and compare the deformation under **hot and cold airflow conditions**.
 
-![Experimental setup: airflow directed toward a flexible strip](images/frame.jpg)
+Multiple measurements were performed to assess repeatability, compare observations, and identify potential sources of experimental error and uncertainty.
 
-## Image-processing workflow
+### Experimental Setup
 
-1. **Pixel calibration:** `src/pixel.py` lets the user click two points on an image and reports their distance in pixels. A known physical distance can then be used to calculate the image scale.
-2. **Tip tracking:** `src/tracking_tige.py` reads a video frame by frame, detects red regions in HSV color space, and selects the largest qualifying contour.
-3. **Tip localization:** the point on the detected contour farthest from a manually selected fixed base is treated as the strip tip.
-4. **Displacement:** tip movement is calculated relative to its position in the first successfully detected frame, then converted from pixels to millimetres.
-5. **Outputs:** the script can export tracking CSVs, a summary, an annotated video, and a displacement-versus-time plot highlighting the maximum detected displacement.
+![Experimental setup](images/frame.jpg)
 
-**Important:** the code reports the *magnitude of tip displacement* relative to the initial detected position. This is not a full-field strain measurement. Tracking quality depends on lighting, the red marker, the camera position, and the selected calibration factor.
+## Measurement Techniques
 
-## Files
+The project involved four categories of measurement techniques:
 
-```text
-src/
-  pixel.py            # Interactive two-point pixel distance measurement
-  tracking_tige.py    # Video tracking and tip displacement analysis
-images/
-  frame.jpg           # Experimental setup photo
-src/
-  frame.jpg           # Calibration input used by pixel.py
-  video_tige.mp4      # Original experimental recording
-demo/
-  tracking_output.mp4 # Annotated tracking demonstration
-requirements.txt      # Python dependencies
-```
+1. **Image-Based Processing:** Video analysis to track the deformation of the flexible strip.
+2. **Sensor Measurements:** Load cell measurements of aerodynamic forces and temperature measurements of the airflow.
+3. **Optical Field Measurement:** Background-Oriented Schlieren (BOS) to visualize airflow density gradients.
+4. **Digital Signal Processing:** Processing and analysis of experimental measurement signals.
 
-## Running the code
+## My Contribution — Image Processing
 
-Install dependencies:
+I developed a Python-based image-processing tool to measure the deformation of the flexible strip from video recordings.
 
-```bash
-python -m pip install -r requirements.txt
-```
+Using **OpenCV**, the program detects and tracks the strip through colour segmentation, calculates its displacement, and converts pixel measurements into millimetres.
 
-For calibration, the included `src/frame.jpg` is read by `pixel.py`. Run:
+**Python scripts:**
+- [`pixel.py`](src/pixel.py) — Pixel-to-distance calibration.
+- [`tracking_tige.py`](src/tracking_tige.py) — Automated deformation tracking.
 
-```bash
-python src/pixel.py
-```
+**Experimental videos:**
+- [Input video](src/video_tige.mp4) — Original experimental recording.
+- [Output video](demo/tracking_output.mp4) — Processed video showing the automated tracking.
 
-For video tracking, the original recording is included as `src/video_tige.mp4`. Review `mm_per_pixel` and other settings near the top of the script, then run:
+Beyond the programming work, I helped coordinate the project, contributed to the experimental methodology, and wrote most of the technical report.
 
-```bash
-python src/tracking_tige.py
-```
+## Project Documentation
 
-**Video demonstration:** [Original recording](src/video_tige.mp4) · [Annotated tracking output](demo/tracking_output.mp4).
+This project was completed during the sixth semester of the Bachelor's degree in Mechanical Engineering at EPFL, as part of the Measurement Techniques course (4 ECTS).
 
-**Note:** the original experimental video is included, but reproducibility still depends on the interactive selections and project-specific calibration settings. The scripts are preserved as used in the project, including interactive OpenCV windows and a macOS-specific command to open the generated video. The calibration factor `0.109 mm/pixel` is a project setting, not a universal value.
+The work was carried out by a team of four students.
 
-## Experimental context
-
-The broader group project also used other experimental measurement techniques. This repository focuses on my image-processing contribution rather than reproducing the complete group experiment.
-
-## Tools and methods
-
-Python · OpenCV · NumPy · pandas · Matplotlib · HSV segmentation · Contour detection · Video processing · Experimental calibration
+A complete technical report was produced, covering the experimental setup, measurement methods, data analysis, uncertainties, and conclusions. The report is not publicly included in this repository.
