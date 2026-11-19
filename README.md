@@ -1,6 +1,6 @@
 # Experimental Investigation of Wind-Induced Deformation
 
-**EPFL · BSc Mechanical Engineering (BA6) · Measurement Techniques (ME-301) · 4 ECTS**
+**EPFL · BSc Mechanical Engineering (BA6) · Measurement Techniques (ME-301) · 4 ECTS ·**
 **Academic group project · Team of four**
 
 **Python · OpenCV · Experimental Measurements · Fluid–Structure Interaction**
